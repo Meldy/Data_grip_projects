@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>console.sql</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+console.sql</font>
+</center></td></tr></table>
+<pre><span class="s0">SHOW GLOBAL VARIABLES LIKE </span><span class="s2">'named_pipe'</span><span class="s0">;</span>
+<span class="s0">CREATE TABLE </span><span class="s1">CATEGORY (</span>
+<span class="s1">ID </span><span class="s0">INT NOT NULL AUTO_INCREMENT ,</span>
+<span class="s1">CATEGORY_DESCRIPTION </span><span class="s0">VARCHAR</span><span class="s1">(</span><span class="s3">20</span><span class="s1">) </span><span class="s0">NOT NULL ,</span>
+<span class="s0">PRIMARY KEY </span><span class="s1">(ID)</span>
+<span class="s1">)</span><span class="s0">;</span>
+<span class="s0">CREATE TABLE </span><span class="s1">BOOK (</span>
+<span class="s1">ID </span><span class="s0">INT NOT NULL AUTO_INCREMENT,</span>
+<span class="s1">CATEGORY_ID </span><span class="s0">INT NOT NULL ,</span>
+<span class="s1">BOOK_TITLE </span><span class="s0">VARCHAR</span><span class="s1">(</span><span class="s3">60</span><span class="s1">) </span><span class="s0">NOT NULL,</span>
+<span class="s1">PUBLISHER </span><span class="s0">VARCHAR</span><span class="s1">(</span><span class="s3">60</span><span class="s1">) </span><span class="s0">NOT NULL ,</span>
+<span class="s0">PRIMARY KEY </span><span class="s1">(ID) </span><span class="s0">,</span>
+<span class="s0">CONSTRAINT </span><span class="s1">FK_BOOK_1 </span><span class="s0">FOREIGN KEY </span><span class="s1">(CATEGORY_ID) </span><span class="s0">REFERENCES</span>
+<span class="s1">CATEGORY(ID)</span>
+<span class="s1">)</span><span class="s0">;</span>
+<span class="s0">CREATE TABLE </span><span class="s1">AUTHOR (</span>
+<span class="s1">ID </span><span class="s0">INT NOT NULL AUTO_INCREMENT ,</span>
+<span class="s1">BOOK_ID </span><span class="s0">INT NOT NULL ,</span>
+<span class="s1">FIRST_NAME </span><span class="s0">VARCHAR</span><span class="s1">(</span><span class="s3">20</span><span class="s1">) </span><span class="s0">NOT NULL ,</span>
+<span class="s1">LAST_NAME </span><span class="s0">VARCHAR</span><span class="s1">(</span><span class="s3">20</span><span class="s1">) </span><span class="s0">NOT NULL ,</span>
+<span class="s0">PRIMARY KEY </span><span class="s1">(ID) </span><span class="s0">,</span>
+<span class="s0">CONSTRAINT </span><span class="s1">FK_AUTHOR_1 </span><span class="s0">FOREIGN KEY </span><span class="s1">(BOOK_ID) </span><span class="s0">REFERENCES</span>
+<span class="s1">BOOK (ID)</span>
+<span class="s1">)</span><span class="s0">;</span>
+
+<span class="s0">insert into </span><span class="s1">category (category_description)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s2">'Clojure'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">category (category_description)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s2">'Groovy'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">category (category_description)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s2">'Java'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">category (category_description)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s2">'Scala'</span><span class="s1">)</span><span class="s0">;</span>
+
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">1</span><span class="s0">, </span><span class="s2">'Practical Clojure'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">2</span><span class="s0">, </span><span class="s2">'Beginning Groovy, Grails and Griffon'</span><span class="s0">,</span>
+<span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">2</span><span class="s0">, </span><span class="s2">'Definitive Guide to Grails 2'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">2</span><span class="s0">, </span><span class="s2">'Groovy and Grails Recipes'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Modern Java Web Development'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Java 7 Recipes'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Java EE 7 Recipes'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Beginning Java 7 '</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Pro Java 7 NIO.2'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Java 7 for Absolute Beginners'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Oracle Certified Java Enterprise Architect Java 
+EE7'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Book (CATEGORY_ID</span><span class="s0">, </span><span class="s1">BOOK_TITLE</span><span class="s0">, </span><span class="s1">PUBLISHER)</span>
+<span class="s0">values </span><span class="s1">(</span><span class="s3">4</span><span class="s0">, </span><span class="s2">'Beginning Scala'</span><span class="s0">, </span><span class="s2">'Apress'</span><span class="s1">)</span><span class="s0">;</span>
+
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">, </span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">1</span><span class="s0">, </span><span class="s2">'Luke'</span><span class="s0">, </span><span class="s2">'VanderHart'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">, </span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">2</span><span class="s0">, </span><span class="s2">'Vishal'</span><span class="s0">, </span><span class="s2">'Layka'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">, </span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">3</span><span class="s0">, </span><span class="s2">'Jeff'</span><span class="s0">, </span><span class="s2">'Brown'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">, </span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">4</span><span class="s0">, </span><span class="s2">'Bashar'</span><span class="s0">, </span><span class="s2">'Jawad'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">, </span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">5</span><span class="s0">, </span><span class="s2">'Vishal'</span><span class="s0">, </span><span class="s2">'Layka'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">,</span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">6</span><span class="s0">, </span><span class="s2">'Josh'</span><span class="s0">, </span><span class="s2">'Juneau'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">,</span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">7</span><span class="s0">, </span><span class="s2">'Josh'</span><span class="s0">, </span><span class="s2">'Juneau'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">,</span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">8</span><span class="s0">, </span><span class="s2">'Jeff'</span><span class="s0">, </span><span class="s2">'Friesen'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">,</span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">9</span><span class="s0">, </span><span class="s2">'Anghel'</span><span class="s0">, </span><span class="s2">'Leonard'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">,</span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">10</span><span class="s0">, </span><span class="s2">'Jay'</span><span class="s0">, </span><span class="s2">'Bryant'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">,</span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+<span class="s1">(</span><span class="s3">11</span><span class="s0">, </span><span class="s2">'B V'</span><span class="s0">, </span><span class="s2">'Kumar'</span><span class="s1">)</span><span class="s0">;</span>
+<span class="s0">insert into </span><span class="s1">Author (BOOK_ID</span><span class="s0">,</span><span class="s1">FIRST_NAME</span><span class="s0">, </span><span class="s1">LAST_NAME) </span><span class="s0">values</span>
+  <span class="s1">(</span><span class="s3">12</span><span class="s0">, </span><span class="s2">'David'</span><span class="s0">, </span><span class="s2">'Pollak'</span><span class="s1">)</span><span class="s0">;</span>
+</pre>
+</body>
+</html>
